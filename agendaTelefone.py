@@ -3,14 +3,15 @@ agenda = {}
 def adicionar_contato():
     nome = input("Digite um nome:\n")
     numero = input("Digite um número:\n")
-    agenda[nome] = numero
+    apelido = input("Digite um apelido (opcional):\n")
+    agenda[nome] = {"telefone": numero, "apelido": apelido if apelido else "Sem apelido"}
     print("Contato adicionado!")
     menu()
 
 def buscar_contato():
     nome = input("Digite um nome para busca:\n")
     if nome in agenda:
-        print(f"Nome: {nome}\nTelefone: {agenda[nome]}")
+        print(f"Nome: {nome}\nTelefone: {agenda[nome]['telefone']}\nApelido: {agenda[nome]['apelido']}")
     else:
         print("Contato não encontrado")
     menu()
@@ -20,8 +21,8 @@ def listar_contatos():
         print("A agenda está vazia.")
     else:
         print("Lista de contatos:")
-        for nome, numero in agenda.items():
-            print(f"Nome: {nome} - Telefone: {numero}")
+        for nome, info in agenda.items():
+            print(f"Nome: {nome} - Telefone: {info['telefone']} - Apelido: {info['apelido']}")
     menu()
 
 def menu():
